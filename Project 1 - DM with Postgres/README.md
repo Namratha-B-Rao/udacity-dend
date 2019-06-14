@@ -81,18 +81,7 @@ Command to execute on the terminal:**python etl.py**
      %sql select * from songs where trim(title) in ('Chicken Hawk');  
      Returned no records.Hence song _id refected as None in Song plays table.
  
-3. **_Noticed from the songs data set , the we have 71 unique songs and 69 unique artists_**.  
-   %sql SELECT COUNT(distinct(song_id)) from songs;  
-   71  
-   %sql SELECT count(DISTINCT(ARTIST_ID)) from artists;  
-   69  
 
-   **Below is the duplicated song record in songs table , checked to ensure that the song has same artist id atleast as one song cannot have multiple artist id's but a single artist can have multiple song id's**  
-
-   %sql SELECT * from songs where song_id='SOMZWCG12A8C13C480';  
-    song_id	title	artist_id	year	duration  
-    SOMZWCG12A8C13C480	I Didn't Mean To	ARD7TVE1187B99BFB1	0	218.932  
-    SOMZWCG12A8C13C480	I Didn't Mean To	ARD7TVE1187B99BFB1	0	218.932  
 
 
 
