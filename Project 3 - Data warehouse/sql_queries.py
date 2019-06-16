@@ -95,7 +95,7 @@ staging_songs_copy = ("""copy staging_songs from {} iam_role {} region 'us-west-
 songplay_table_insert = (""" INSERT INTO songplays (start_time, user_id, level, song_id, artist_id, session_id, location, user_agent) SELECT distinct e.ts as start_time, e.userId as user_id, e.level as level, s.song_id as song_id, s.artist_id as artist_id, e.sessionId as session_id, e.location as location, e.userAgent as user_agent FROM staging_events e join staging_songs s on (trim(s.title) = trim(e.song) and trim(s.artist_name) = trim(e.artist) and s.duration = e.length) where trim(e.page) in ('NextSong');
 """)
 
-user_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level) SELECT distinct userId, firstName, lastName, gender, level FROM staging_events where userId IS NOT NULL;
+user_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level) SELECT distinct userId, firstName, lastName, gender, level FROM staging_events where page in ('NextSong') and userId IS NOT NULL;
 """)
 
 song_table_insert = (""" INSERT INTO songs (song_id, title, artist_id, year, duration) SELECT distinct song_id, title, artist_id, year, duration FROM staging_songs;
